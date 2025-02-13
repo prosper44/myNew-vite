@@ -19,22 +19,24 @@
      
     <div   class="mt-10  lg:w-400 h-500 p-8 " >
       <div class="mb-4">
-          <label for="fullName" class="lg:ml-145 block text-sm font-medium text-gray-700 ">Full Name</label>
-          <input v-model="fullName" type="text" id="full-name" class="mx-auto border border-solid border-black  mt-1 block  rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 lg:w-95 p-4 md:w-85 p-2   ">
-      </div>
+         
+          <label for="fullName" class="lg:ml-145 block text-sm font-medium text-gray-700 ">Full name</label>
+          <input v-model="fullName" type="text" id="full-name" class=" mx-auto border border-solid border-black  mt-1 block  rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 lg:w-95 p-4 md:w-85 p-2 sm: w-[300px]  " >
+      
+        </div>
     <div class="mb-4">
       <label for="email" class="lg:ml-145 block text-sm font-medium text-gray-700 ">Email</label>
-      <input v-model="email" type="email" id="password" class="mx-auto border border-solid border-black  mt-1 block  rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 lg:w-95 p-4 md:w-85 p-2   ">
+      <input v-model="email" type="email" id="password" class="mx-auto border border-solid border-black  mt-1 block  rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 lg:w-95 p-4 md:w-85 p-2 z  " >
     </div>
 
     <div class="mb-4">
       <label for="password" class="lg:ml-145 block text-sm font-medium text-gray-700 ">Password</label>
-      <input v-model="password" type="password" id="password" class="mx-auto border border-solid border-black  mt-1 block  rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 lg:w-95 p-4 md:w-85 p-2   ">
+      <input v-model="password" type="password" id="password" class="mx-auto border border-solid border-black  mt-1 block  rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 lg:w-95 p-4 md:w-85 p-2   " required>
     </div>
       <div class="flex justify-center mt-20">
-       <RouterLink to="/">
-        <button   type="submit" class="bg-[#5271FF] hover:bg-blue-700 text-white  py-2 px-10 w-40 rounded"> Create</button>
-       </RouterLink>
+       
+     <button @click="clickSubmit"  type="submit" class="bg-[#5271FF] hover:bg-blue-700 text-white  py-2 px-10 w-40 rounded"> Create</button>
+       
           
       </div>
       
@@ -54,33 +56,22 @@
   
 </template>
 
-    <script>
+    <script setup>
   import  { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-  export default{
-    setup(){
-      const fullName = ref('');
-      const email = ref('');
-      const password = ref('');
 
-      
+    const $router =useRouter();
+    const fullName = ref('');
+    const email = ref('');
+    const password = ref('');
 
-      const handleSubmit =()=>{
-        const registrationData ={
-          fullName: fullName.value,
-          email:email.value,
-          password: password.value
-          
-        };
-        alert('successfull, you can now log in');
-       
-        useRouter().push({ 
-          fullName: 'LoginPage',
-        params: {registrationData} });
-      };
-      
-      return {fullName,email,password, handleSubmit}
-      
-    },
-  };
+
+
+    function clickSubmit(){
+      if(fullName.value !== '' && email.value !== ''){
+      $router.push({path: '/'})
+    } else{
+      alert('Please enter required fields')
+    }
+    }
   </script>

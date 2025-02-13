@@ -24,16 +24,16 @@
     <form action="" class="mt-10">
       <div class="mb-4">
           <label for="email" class="block text-sm font-medium text-gray-700 ">Email</label>
-          <input  type="email" id="email" class=" border border-solid border-black p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+          <input v-model='email'  type="email" id="email" class=" border border-solid border-black p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" >
       </div>
     <div class="mb-4">
       <label for="password" class="block text-sm font-medium text-gray-700 ">Password</label>
-      <input type="password" id="password" class=" border border-solid border-black p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      <input v-model="password" type="password" id="password" class=" border border-solid border-black p-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" >
     </div>
       <div class="flex justify-center ">
-   <RouterLink to="/Welcome">
-    <button  type="submit" class="bg-[#5271FF] hover:bg-blue-700 text-white  py-2 px-10 w-40 rounded"> Login</button>
-   </RouterLink>
+   
+    <button @click="clickSubmit"  type="submit" class="bg-[#5271FF] hover:bg-blue-700 text-white  py-2 px-10 w-40 rounded"> Login</button>
+   
         
       </div>
     </form>
@@ -50,17 +50,24 @@
   </template>
 
 
-<script>
-import LoginPage from './LoginPage.vue';
+<script setup>
+  import  { ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-export default{
-  props: {
-    registrationData: {
-      type: Object,
-      required: true,
-    },
-  },
-};
+
+    const $router =useRouter();
+    
+    const email = ref('');
+    const password = ref('');
+    
+   
+    function clickSubmit(){
+     
+      if(password.value !== '' && email.value !== ''){
+      $router.push({path: '/Welcome'})
+    } else{
+      alert('Please enter required fields')
+    }
+    }
 </script>
   
   
